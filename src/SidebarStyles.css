@@ -1,0 +1,38 @@
+.sidebar-elements {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 12%;
+    background-color: #474747;
+    padding: 47px 26px;
+    width: 124px;
+    height: 100vh;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.sidebar-element-button {
+    display: flex;
+    align-items: center;
+    background-color: #260029;
+    color: #F2E6FF;
+    height: 98px;
+    width: 72px;
+    border-radius: 8px;
+    border: 1px solid #260029;
+}
+
+.sidebar-element-button-icon {
+    height: 53px;
+    width: 53px;
+}
+
+.sidebar-element-button-text {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+
+    /* word-wrap: break-word; */
+}

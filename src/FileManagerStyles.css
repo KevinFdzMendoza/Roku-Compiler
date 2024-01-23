@@ -1,0 +1,44 @@
+.fileManager {
+    grid-column: 2;
+    grid-row: 1;
+
+    width: 236px;
+}
+
+.fileManager-tree-root {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background-color: #474747;
+    color: #F2E6FF;
+}
+
+.fileManager-tree-node {
+    position: relative;
+    padding-left: 20px;
+    border-left: 3px solid #3D3D3D;
+    background-color: #303030;
+    color: #F2E6FF;
+    
+}
+
+.fileManager-tree-node + .fileManager-tree-node,
+.filemanager-element-hyperlink + .fileManager-tree-node,
+.fileManager-tree-root + .fileManager-tree-node {
+    padding-top: 10px;
+}
+
+.fileManager-element-icon {
+    vertical-align: middle;
+    height: 26px;
+}
+
+.fileManager-element-text {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+
+    vertical-align: middle;
+    padding-left: 6px;
+}
