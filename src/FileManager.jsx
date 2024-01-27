@@ -1,13 +1,48 @@
-import { useState } from 'react'
 import { HyperLinkItem } from './HyperLinkItem'
 import "./FileManagerStyles.css";
+import { useState, useRef, useLayoutEffect } from 'react'
 
+const CONTAINER_WIDTH = 237
+const PADDING_PER_CHILD = 20
+
+export function FileManager({}) {
+    // const [count, setCount] = useState(0)
+
+    // Mock data 
+    const dataDirectory = [
+        {"name":"components","path":"","isDirectory":true,"isFile":false},
+        {"name":"images","path":"","isDirectory":true,"isFile":false},
+        {"name":"manifest","path":"","isDirectory":false,"isFile":true},
+        {"name":"source","path":"","isDirectory":true,"isFile":false},
+        {"name":"BaseScreen","path":"components","isDirectory":true,"isFile":false},
+        {"name":"MainScene.brs","path":"components","isDirectory":false,"isFile":true},
+        {"name":"MainScene.xml","path":"components","isDirectory":false,"isFile":true},
+        {"name":"main.brs","path":"source","isDirectory":false,"isFile":true},
+        {"name":"VeryLongComponentForTest","path":"components\\BaseScreen","isDirectory":true,"isFile":false},
+        {"name":"ScreenItem1","path":"components\\BaseScreen","isDirectory":true,"isFile":false},
+        {"name":"ScreenItem2","path":"components\\BaseScreen","isDirectory":true,"isFile":false},
+        {"name":"ScreenItem1","path":"components\\BaseScreen\\ScreenItem1","isDirectory":true,"isFile":false},
+        {"name":"ScreenItem1","path":"components\\BaseScreen\\ScreenItem1\\ScreenItem1","isDirectory":true,"isFile":false}
+    ]
+
+    const tree = getdirectoryStruct()
+    fillTreeNodes(tree, dataDirectory)
+
+    return (
+        <div className='fileManager' style={{width:`${CONTAINER_WIDTH}px`}}>
+            { tree.getRenderable() }
+        </div>
+    )
+}
+
+/**
+* Creates a tree node object
+*/
 class Node {
     constructor() {
         this.name = ""
         this.childNodes = {}
         this.isFolder = false
-        this.item = ""
         this.parent = ""
     }
 
@@ -46,17 +81,27 @@ class Node {
         return this._name
     }
 }
-// create class rootnode with the renderable item
+
+/**
+ * Creates a tree structure.
+ * 
+ * It will be necessary to set the root node
+ */
 class NodeTree {
-    #children = []
+    #childrenArray = []
+    constructor() {
+        this.#initializeRootNode()
+    }
 
     set root(root) {
         this._root = new Node()
-        this._root.item = root.item
+        this._root.name = root.name
+        this._root.isFolder = root.isFolder
         this._root.childNodes = root.childNodes
 
-        this.#children.push(this._root.item)
+        this.#childrenArray.push(root.renderable)
     }
+
     get root() {
         return this._root
     }
@@ -70,14 +115,14 @@ class NodeTree {
     *       "name": string with node name,
     *       "parent": string with parent name,
     *       "isFolder": boolean to declare if its folder or file
-    *       "childNodes": object {} with tree node
+    *       "childNodes": object {} with tree child node
     *   }
     *   ```
     * 
     * If no parent defined, node will be added to root node.
     */
     addNewNode(newNode) {
-        if (this._root === undefined) return
+        if (this._root === undefined) return new Error("No root node has been set")
         if (newNode.name === undefined) throw new TypeError("Missing node name")
 
         let node = new Node()
@@ -103,36 +148,42 @@ class NodeTree {
         }
     }
 
+    /**
+     * loops trough the child nodes in the root node and starts setting the renderable components
+     * @returns array with renderable components of the tree structure
+     */
     getRenderable() {
-        this.#setNodeChildren(this._root.childNodes)
-        this.#setRenderableArray(this._root.childNodes)
+        if (this._root === undefined) return new Error("No root node has been set")
 
-        return this.#children
+        this.#setNodeChildren(this._root.childNodes)
+
+        return this.#childrenArray
     }
 
+    /**
+     * Fills recursively children array with renderable components
+     */
     #setNodeChildren(nodes, depth = 1) {
         // recursive setting
         let items = [];
+
         for (const key in nodes) {
             if (typeof nodes[key] === 'object') {
+                const childNode = nodes[key]
+                const childNodeChildren = typeof childNode.childNodes === 'object' && Object.keys(childNode.childNodes).length !== 0
+                    ? this.#setNodeChildren(childNode.childNodes, depth + 1)
+                    : null;
 
-                const children = nodes[key].childNodes != undefined && Object.keys(nodes[key].childNodes).length !== 0 ?
-                this.#setNodeChildren(nodes[key].childNodes, depth + 1) : null;
-                console.log("Hola");
-
-                const item = <div key={`Row_${depth}-${nodes[key].name}`}
-                    className='fileManager-tree-node'>
-                        <div className='fileManager-tree-node-bg'></div>
-                        <HyperLinkItem>
-                            {{
-                                "iconClassName": "fileManager-element-icon",
-                                "icon": nodes[key].isFolder ? "src/static/images/folder-icon.svg": "src/static/images/file-icon.svg",
-                                "textClassName": "fileManager-element-text",
-                                "text": nodes[key].name,
-                                "wrapperClassName": "filemanager-element-hyperlink"
-                            }}
-                        </HyperLinkItem>
-                        {children}
+                const item = <div key={`Row_${depth}-${childNode.name}`} className='fileManager-tree-node' style={{paddingLeft:`${PADDING_PER_CHILD}px`, width:`${CONTAINER_WIDTH + (PADDING_PER_CHILD * depth)}px`}}>
+                    <HyperLinkItem>
+                        {{
+                            "iconClassName": "fileManager-element-icon",
+                            "icon": childNode.isFolder ? "src/static/images/folder-icon.svg": "src/static/images/file-icon.svg",
+                            "textClassName": "fileManager-element-text",
+                            "text": childNode.name
+                        }}
+                    </HyperLinkItem>
+                    {childNodeChildren}
                 </div>
 
                 items.push(item);
@@ -141,21 +192,18 @@ class NodeTree {
 
         // push the root children with their respective children
         if (depth === 1) {
-            this.#children.push(...items);
+            this.#childrenArray.push(...items);
         }
         return items
     }
 
-    #setRenderableArray() {
-        
-    }
-}
-
-function getdirectoryStruct() {
-    const tree = new NodeTree()
-    tree.root = {
-        "name": "root",
-        "item": <div key="root" className='fileManager-tree-root'>
+    /**
+     * fills root node
+     */
+    #initializeRootNode() {
+        this.root = {
+            "name": "root",
+            "renderable": <div key="root" className='fileManager-tree-root'>
                 <HyperLinkItem>
                     {
                         {
@@ -167,48 +215,26 @@ function getdirectoryStruct() {
                     }
                 </HyperLinkItem>
             </div>,
-        "isFolder": true,
-        "childNodes": {}
+            "isFolder": true,
+            "childNodes": {}
+        }
     }
+}
+
+function getdirectoryStruct() {
+    const tree = new NodeTree()
 
     return tree
 }
 
-export function FileManager({}) {
-    // const [count, setCount] = useState(0)
-
-    // Mock data 
-    const dataDirectory = [
-        {"name":"components","path":"","isDirectory":true,"isFile":false},
-        {"name":"images","path":"","isDirectory":true,"isFile":false},
-        {"name":"manifest","path":"","isDirectory":false,"isFile":true},
-        {"name":"source","path":"","isDirectory":true,"isFile":false},
-        {"name":"BaseScreen","path":"components","isDirectory":true,"isFile":false},
-        {"name":"MainScene.brs","path":"components","isDirectory":false,"isFile":true},
-        {"name":"MainScene.xml","path":"components","isDirectory":false,"isFile":true},
-        {"name":"main.brs","path":"source","isDirectory":false,"isFile":true},
-        {"name":"ScreenComponent","path":"components\\BaseScreen","isDirectory":true,"isFile":false},
-        {"name":"ScreenItem1","path":"components\\BaseScreen","isDirectory":true,"isFile":false},
-        {"name":"ScreenItem2","path":"components\\BaseScreen","isDirectory":true,"isFile":false}
-    ]
-
-    const tree = getdirectoryStruct()
-
+function fillTreeNodes(treeStructure, data) {
     // Add nodes with data
-    for (const element of dataDirectory) {
-        tree.addNewNode({
+    for (const element of data) {
+        treeStructure.addNewNode({
             "name": element.name,
             "parent": element.path,
             "isFolder": element.isDirectory,
             "childNodes": {}
         })
     }
-
-    return (
-        <div className='fileManager'>
-            {
-                tree.getRenderable()
-            }
-        </div>
-    )
 }
