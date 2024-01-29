@@ -1,7 +1,24 @@
 .fileManager {
     overflow: auto;
     background-color: #303030;
-    background: linear-gradient(180deg, #474747 0%, #303030 4%);
+    background: linear-gradient(180deg, #474747 4%, #303030 4%);
+}
+
+.fileManager::-webkit-scrollbar {
+    height: 1px;
+}
+
+.fileManager::-webkit-scrollbar-track {
+    background: #909090;
+}
+
+.fileManager::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 3px;
+}
+
+.fileManager:hover {
+    overflow-x: scroll;
 }
 
 .fileManager-tree-root {

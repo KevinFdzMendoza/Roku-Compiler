@@ -1,4 +1,5 @@
 import { HyperLinkItem } from './HyperLinkItem'
+import { Draggable } from './Draggable';
 import "./FileManagerStyles.css";
 import { useState, useRef, useLayoutEffect } from 'react'
 
@@ -29,9 +30,9 @@ export function FileManager({}) {
     fillTreeNodes(tree, dataDirectory)
 
     return (
-        <div className='fileManager' style={{width:`${CONTAINER_WIDTH}px`}}>
+        <Draggable topClass='fileManager' styles={{width:`${CONTAINER_WIDTH}px`}}>
             { tree.getRenderable() }
-        </div>
+        </Draggable>
     )
 }
 
@@ -203,7 +204,7 @@ class NodeTree {
     #initializeRootNode() {
         this.root = {
             "name": "root",
-            "renderable": <div key="root" className='fileManager-tree-root'>
+            "renderable": <div key="root" className='fileManager-tree-root' style={{width:`${CONTAINER_WIDTH + PADDING_PER_CHILD}px`}}>
                 <HyperLinkItem>
                     {
                         {

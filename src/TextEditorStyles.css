@@ -1,0 +1,78 @@
+.textEditor {
+    display: flex;
+    flex-direction: column;
+}
+
+.textEditor-fileSelector {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    overflow-x: hidden
+}
+
+.textEditor-fileSelector::-webkit-scrollbar {
+    height: 1px;
+}
+
+.textEditor-fileSelector::-webkit-scrollbar-track {
+    background: #909090;
+}
+
+.textEditor-fileSelector::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 3px;
+}
+
+.textEditor-fileSelector:hover {
+    overflow-x: scroll;
+}
+
+.textEditor-fileSelector-element {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    background-color: #3D3D3D;
+    padding: 5% 12%;
+    color: black;
+}
+
+.textEditor-fileSelector-element-selected {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    background-color: #303030;
+    padding: 5% 12%;
+    color: white;
+}
+
+.textEditor-fileSelector-element-icon {
+    display: flex;
+    height: 29px;
+    width: 29px;
+}
+
+.textEditor-fileSelector-element-no-icon {
+    display: flex;
+    height: 0;
+    width: 0;
+}
+
+.textEditor-fileSelector-element-text {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.textEditor-fileSelector-element-no-text {
+    display: flex;
+    height: 0;
+    width: 0;
+}
+
+.textEditor-debug-icon {
+    padding-left: 85%;
+    height: 48px;
+    width: 48px;
+}
