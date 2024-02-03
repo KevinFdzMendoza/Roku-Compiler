@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.textEditor-fileSelector {
+.textEditor-fileSelector, .textEditor-fileSelector-long {
     display: flex;
     flex-direction: row;
     overflow: auto;

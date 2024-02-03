@@ -54,7 +54,7 @@ export function TextEditor() {
 
     return (
         <div className='textEditor' style={containerSizes}>
-            <Draggable topClass="textEditor-fileSelector">
+            <Draggable topClass={containerSizes.width != "100vw" ? "textEditor-fileSelector" : "textEditor-fileSelector-long"}>
                 {renderableFiles}
             </Draggable>
 
