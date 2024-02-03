@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SidebarElement } from './SidebarElement'
+import { SidebarItem } from './SidebarItem'
 import './SidebarStyles.css'
 
 export function Sidebar() {
@@ -7,7 +7,7 @@ export function Sidebar() {
 
     return (
         <div className='sidebar-elements'>
-            <SidebarElement />
+            <SidebarItem />
         </div>
     )
 }

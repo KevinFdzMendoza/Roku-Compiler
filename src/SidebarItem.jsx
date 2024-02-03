@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { HyperLinkItem } from './HyperLinkItem'
 import './SidebarStyles.css'
 
-export function SidebarElement() {
+export function SidebarItem() {
     // const [count, setCount] = useState(0)
 
     // Mock data 
+    // Esta data debe venir de más arriba
     const buttonsObj = [
         {
             "id": "project-icon",

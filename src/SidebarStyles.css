@@ -7,8 +7,6 @@
     padding: 47px 26px;
     width: 124px;
     height: 100vh;
-    grid-column: 1;
-    grid-row: 1;
 }
 
 .sidebar-element-button {
@@ -33,6 +31,4 @@
     font-weight: 700;
     font-style: normal;
     font-variation-settings: "wdth" 100;
-
-    /* word-wrap: break-word; */
 }
