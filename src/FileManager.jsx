@@ -30,9 +30,11 @@ export function FileManager({}) {
     fillTreeNodes(tree, dataDirectory)
 
     return (
-        <Draggable topClass='fileManager' styles={{width:`${CONTAINER_WIDTH}px`}}>
-            { tree.getRenderable() }
-        </Draggable>
+        <div className='fileManager'>
+            <Draggable topClass='fileManager-scrollable' styles={{width:`${CONTAINER_WIDTH}px`}}>
+                { tree.getRenderable() }
+            </Draggable>
+        </div>
     )
 }
 

@@ -1,6 +1,9 @@
 .textEditor {
+    position: relative;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    border-left: 3px solid #474747;
 }
 
 .textEditor-fileSelector, .textEditor-fileSelector-long {
@@ -74,7 +77,9 @@
 }
 
 .textEditor-debug-icon {
-    padding-left: 85%;
+    position: absolute;
+    top: 90%;
+    right: 10%;
     height: 48px;
     width: 48px;
 }

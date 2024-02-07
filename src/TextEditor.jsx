@@ -36,7 +36,6 @@ export function TextEditor() {
             "text": ""
         }
     ]
-    const containerSizes = getContainerSizes() 
     const editorAttributes = getEditorAttributes()
     const renderableFiles = []
     for (const file of openedFiles) {
@@ -53,8 +52,8 @@ export function TextEditor() {
     }
 
     return (
-        <div className='textEditor' style={containerSizes}>
-            <Draggable topClass={containerSizes.width != "100vw" ? "textEditor-fileSelector" : "textEditor-fileSelector-long"}>
+        <div className='textEditor'>
+            <Draggable topClass={renderableFiles.length > 4 ? "textEditor-fileSelector" : "textEditor-fileSelector-long"}>
                 {renderableFiles}
             </Draggable>
 
@@ -79,30 +78,6 @@ export function TextEditor() {
     )
 }
 
-function getContainerSizes() {
-    // mock data while creating new components
-    let valorDeOtrosComponentes = {
-        "VideoPlayer": {
-            "rendered": true
-        },
-        "OutputTerminal": {
-            "rendered": true
-        }
-    }
-
-    const containerWidth = valorDeOtrosComponentes.VideoPlayer.rendered
-        ? "536px"
-        : "100vw"
-    const containerHeight = valorDeOtrosComponentes.OutputTerminal.rendered
-        ? "525px"
-        : "100vh"
-
-    return {
-        width:containerWidth,
-        height: containerHeight
-    }
-}
-
 function getEditorAttributes() {
     return {
         // "CTAs": {
@@ -117,6 +92,7 @@ function getEditorAttributes() {
         //     }
         // },
         "options": {
+            fontSize: 16,
             wordWrap: "on",
             bracketPairColorization: {
                 enabled: true
