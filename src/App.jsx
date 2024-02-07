@@ -1,19 +1,20 @@
 import { useState } from 'react'
-import './AppStyles.css'
+import { BrandingBar } from './BrandingBar'
 import { Sidebar } from './Sidebar'
 import { FileManager } from './FileManager'
 import { TextEditor } from "./TextEditor";
+import { VideoPlayer } from "./VideoPlayer";
 import { Terminal } from "./Terminal";
+import './AppStyles.css'
 
 function App() {
-    // const [count, setCount] = useState(0)
+    const [fileManagerRendered, setFileManagerRendered] = useState(true)
 
     // mock data while creating states of selecting components
     const renderedComponents = {
-        // change this component to the videoplayer when created
         "VideoPlayer": {
             "component": (<div key="VideoPlayer" className='player-grid'>
-                <TextEditor renderedComponents={{}} />
+                <VideoPlayer />
             </div>),
             "rendered": true
         },
@@ -24,19 +25,41 @@ function App() {
             "rendered": true
         }
     }
+    // function renderComponents() {
+    //     setFileManagerRendered(true)
+    // }
 
     return (
         <>
-            <Sidebar />
-            <FileManager />
-            <div className='dev-panel'>
-                <div className={getEditorClass(renderedComponents)}>
-                    <TextEditor renderedComponents={renderedComponents} />
+            {/* Beautiful, but won't make it to the end release, no brand yet */}
+            {/* <div className='compiler-branding'>
+                <BrandingBar />
+            </div> */}
+
+            <div className='compiler-panel'>
+                <div className='compiler-panel-sidebar'>
+                    <Sidebar />
                 </div>
-                <DevPanelComponents renderedComponents={renderedComponents} />
+
+                <RenderFileManager rendered={fileManagerRendered} />
+
+                <div className={'dev-panel ' + (fileManagerRendered ? 'compiler-panel-devDashBoard-1' : 'compiler-panel-devDashBoard-2')}>
+                    <div className={getEditorClass(renderedComponents)}>
+                        <TextEditor renderedComponents={renderedComponents} />
+                    </div>
+                    <DevPanelComponents renderedComponents={renderedComponents} />
+                </div>
             </div>
         </>
     )
+}
+
+function RenderFileManager({rendered}) {
+    return (rendered) ? (
+        <div className='compiler-panel-fileManager'>
+            <FileManager />
+        </div>
+    ) : (null)
 }
 
 function DevPanelComponents({renderedComponents}) {
