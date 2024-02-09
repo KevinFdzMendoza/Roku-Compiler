@@ -20,13 +20,13 @@ function App() {
         if (typeof selected != "string" && selected.length == 0) return
         if (isMobile) resetSelected()
 
-        if (selected == "project-icon") {
+        if (selected == "FileManager") {
             setFileManagerSelected(isMobile ? true : !fileManagerSelected)
-        } else if (selected == "txtEditor-icon") {
+        } else if (selected == "TextEditor") {
             setTextEditorSelected(isMobile ? true : !textEditorSelected)
-        } else if (selected == "console-icon") {
+        } else if (selected == "VideoPlayer") {
             setTerminalSelected(isMobile ? true : !terminalSelected)
-        } else if (selected == "play-icon") {
+        } else if (selected == "Terminal") {
             setVideoPlayerSelected(isMobile ? true : !videoPlayerSelected)
         }
     }
@@ -51,7 +51,7 @@ function App() {
             if (media.matches) {
                 resetSelected()
                 setTextEditorSelected(true)
-    }
+            }
         }
         window.addEventListener('resize', resizeCallback);
 
@@ -67,96 +67,104 @@ function App() {
 
             <SelectedComponents
                 isMobile={isMobile}
-                setSelectedComponents={setSelectedComponents}
+                setSelectedFunc={setSelectedComponents}
                 selectedObj={{fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected}}
             />
         </>
     )
 }
 
-function SelectedComponents({isMobile, setSelectedComponents, selectedObj}) {
+function SelectedComponents({isMobile, setSelectedFunc, selectedObj}) {
     if (typeof selectedObj != "object" || Object.keys(selectedObj).length === 0) return null
 
-    const {fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected} = selectedObj
-
     if (isMobile) {
-        let renderable = null
+        return renderMobileComponents(selectedObj, setSelectedFunc)
+    } else {
+        return renderComponents(selectedObj, setSelectedFunc)
+    }
+}
 
-        // textEditor first
-        if (textEditorSelected) {
-            renderable = (
-                <div className='mobile-editor'>
-                    <TextEditor />
-                </div>
-            )
-        } else if (fileManagerSelected) {
-            renderable = (
-                <div className='mobile-fileManager'>
-                    <FileManager />
-                </div>
-            )
-        } else if (videoPlayerSelected) {
-            renderable = (
-                <div className='mobile-videoPlayer'>
-                    <VideoPlayer />
-                </div>
-            )
-        } else if (terminalSelected) {
-            renderable = (
-                <div className='mobile-terminal'>
-                    <Terminal />
-                </div>
-            )
-        }
+function renderMobileComponents(selectedObj, setSelectedFunc) {
+    const {fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected} = selectedObj
+    let renderable = null
 
-        return (
-            <div className='mobile-panel'>
-                {renderable}
-
-                <div className='mobile-sidebar'>
-                    <Sidebar setSelected={setSelectedComponents} />
-                </div>
+    // textEditor first
+    if (textEditorSelected) {
+        renderable = (
+            <div className='mobile-editor'>
+                <TextEditor />
             </div>
         )
-    } else {
-        const devPanelRenderable = [null, null]
-        let fileManagerRenderable = null
-
-        if (fileManagerSelected) {
-            fileManagerRenderable = (<div className='compiler-panel-fileManager'>
+    } else if (fileManagerSelected) {
+        renderable = (
+            <div className='mobile-fileManager'>
                 <FileManager />
-            </div>)
-        }
-
-        if (videoPlayerSelected) {
-            devPanelRenderable[0] = (<div key="VideoPlayer" className='player-grid'>
+            </div>
+        )
+    } else if (videoPlayerSelected) {
+        renderable = (
+            <div className='mobile-videoPlayer'>
                 <VideoPlayer />
-            </div>)
-        }
-
-        if (terminalSelected) {
-            devPanelRenderable[1] = (<div key="Terminal" className='terminal-grid'>
+            </div>
+        )
+    } else if (terminalSelected) {
+        renderable = (
+            <div className='mobile-terminal'>
                 <Terminal />
-            </div>)
-        }
-
-        return (
-            <div className='compiler-panel'>
-                <div className='compiler-panel-sidebar'>
-                    <Sidebar setSelected={setSelectedComponents} />
-                </div>
-
-                {fileManagerRenderable}
-
-                <div className={'dev-panel ' + (fileManagerSelected ? 'panel-col3' : 'panel-col2')}>
-                    <div className={getEditorClass({videoPlayerSelected, terminalSelected})}>
-                        <TextEditor />
-                    </div>
-                    {devPanelRenderable}
-                </div>
             </div>
         )
     }
+
+    return (
+        <div className='mobile-panel'>
+            {renderable}
+
+            <div className='mobile-sidebar'>
+                <Sidebar setSelected={setSelectedFunc} />
+            </div>
+        </div>
+    )
+}
+
+function renderComponents(selectedObj, setSelectedFunc) {
+    const {fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected} = selectedObj
+    const devPanelRenderable = [null, null]
+    let fileManagerRenderable = null
+
+    if (fileManagerSelected) {
+        fileManagerRenderable = (<div className='compiler-panel-fileManager'>
+            <FileManager />
+        </div>)
+    }
+
+    if (videoPlayerSelected) {
+        devPanelRenderable[0] = (<div key="VideoPlayer" className='player-grid'>
+            <VideoPlayer />
+        </div>)
+    }
+
+    if (terminalSelected) {
+        devPanelRenderable[1] = (<div key="Terminal" className='terminal-grid'>
+            <Terminal />
+        </div>)
+    }
+
+    return (
+        <div className='compiler-panel'>
+            <div className='compiler-panel-sidebar'>
+                <Sidebar setSelected={setSelectedFunc} />
+            </div>
+
+            {fileManagerRenderable}
+
+            <div className={'dev-panel ' + (fileManagerSelected ? 'panel-col3' : 'panel-col2')}>
+                <div className={getEditorClass({videoPlayerSelected, terminalSelected})}>
+                    <TextEditor />
+                </div>
+                {devPanelRenderable}
+            </div>
+        </div>
+    )
 }
 
 function getEditorClass(renderedComponents) {

@@ -4,32 +4,32 @@ import './SidebarStyles.css'
 export function Sidebar({setSelected}) {
     const buttonsObj = [
         {
-            "id": "project-icon",
+            "id": "FileManager",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/project-icon.svg',
             "text": "Archivos"
         },
         {
-            "id": "txtEditor-icon",
+            "id": "TextEditor",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/txtEditor-icon.svg',
             "text": "Editor"
         },
         {
-            "id": "console-icon",
-            "iconClassName": "sidebar-element-button-icon",
-            "textClassName": "sidebar-element-button-text",
-            "icon": 'src/static/images/console-icon.svg',
-            "text": "Terminal"
-        },
-        {
-            "id": "play-icon",
+            "id": "VideoPlayer",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/play-icon.svg',
             "text": "Video"
+        },
+        {
+            "id": "Terminal",
+            "iconClassName": "sidebar-element-button-icon",
+            "textClassName": "sidebar-element-button-text",
+            "icon": 'src/static/images/console-icon.svg',
+            "text": "Terminal"
         }
     ]
 
