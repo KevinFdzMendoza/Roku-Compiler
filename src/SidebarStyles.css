@@ -39,3 +39,49 @@
     font-style: normal;
     font-variation-settings: "wdth" 100;
 }
+
+/* ====== Mobile ====== */
+@media (max-width: 800px) {
+    .sidebar {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: #474747;
+        height: 100%;
+    }
+
+    .sidebar-elements {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        column-gap: 15%;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .sidebar-element-button {
+        display: flex;
+        align-items: center;
+        background-color: #260029;
+        color: #F2E6FF;
+        height: 78px;
+        width: 72px;
+        border-radius: 8px;
+        border: 1px solid #260029;
+    }
+
+    .sidebar-element-button-icon {
+        height: 33px;
+        width: 33px;
+    }
+
+    .sidebar-element-button + .sidebar-element-button {
+        margin-top: 0;
+    }
+
+    @media (max-width: 450px) {
+        .sidebar-elements {
+            column-gap: 5%;
+        }
+    }
+}

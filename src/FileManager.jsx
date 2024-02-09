@@ -3,7 +3,7 @@ import { Draggable } from './Draggable';
 import "./FileManagerStyles.css";
 import { useState, useRef, useLayoutEffect } from 'react'
 
-const CONTAINER_WIDTH = 237
+const CONTAINER_WIDTH = "100%"
 const PADDING_PER_CHILD = 20
 
 export function FileManager({}) {
@@ -31,7 +31,7 @@ export function FileManager({}) {
 
     return (
         <div className='fileManager'>
-            <Draggable topClass='fileManager-scrollable' styles={{width:`${CONTAINER_WIDTH}px`}}>
+            <Draggable topClass='fileManager-scrollable'>
                 { tree.getRenderable() }
             </Draggable>
         </div>
@@ -177,7 +177,7 @@ class NodeTree {
                     ? this.#setNodeChildren(childNode.childNodes, depth + 1)
                     : null;
 
-                const item = <div key={`Row_${depth}-${childNode.name}`} className='fileManager-tree-node' style={{paddingLeft:`${PADDING_PER_CHILD}px`, width:`${CONTAINER_WIDTH + (PADDING_PER_CHILD * depth)}px`}}>
+                const item = <div key={`Row_${depth}-${childNode.name}`} className='fileManager-tree-node' style={{paddingLeft:`${PADDING_PER_CHILD}px`, width:`calc(${CONTAINER_WIDTH} + ${(PADDING_PER_CHILD * depth)}px)`}}>
                     <HyperLinkItem>
                         {{
                             "iconClassName": "fileManager-element-icon",
@@ -206,7 +206,7 @@ class NodeTree {
     #initializeRootNode() {
         this.root = {
             "name": "root",
-            "renderable": <div key="root" className='fileManager-tree-root' style={{width:`${CONTAINER_WIDTH + PADDING_PER_CHILD}px`}}>
+            "renderable": <div key="root" className='fileManager-tree-root'>
                 <HyperLinkItem>
                     {
                         {

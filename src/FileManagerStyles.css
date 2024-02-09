@@ -1,11 +1,15 @@
 .fileManager {
     background-color: #303030;
-    background: linear-gradient(180deg, #474747 8%, #303030 8%);
+    background: linear-gradient(180deg, #474747 6%, #303030 6%);
+    height: 100%;
+    width: 100%;
 }
 
 .fileManager-scrollable {
     overflow: auto;
     overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 .fileManager-scrollable::-webkit-scrollbar {

@@ -38,3 +38,11 @@
     height: 0;
     width: 0;
 }
+
+@media (max-width: 800px) {
+    .terminal-deleteButton {
+        position: absolute;
+        top: 90%;
+        right: 5%;
+    }
+}
