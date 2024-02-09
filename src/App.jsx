@@ -11,16 +11,31 @@ function App() {
     const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 800px)").matches);
 
     // mock data while creating states of selecting components
-    const [fileManagerRendered, setFileManagerRendered] = useState(false)
-    const [textEditorRendered, setTextEditorRendered] = useState(true)
-    const [videoPlayerRendered, setVideoPlayerRendered] = useState(true)
-    const [terminalRendered, setTerminalRendered] = useState(true)
+    const [fileManagerSelected, setFileManagerSelected] = useState(false)
+    const [textEditorSelected, setTextEditorSelected] = useState(true)
+    const [videoPlayerSelected, setVideoPlayerSelected] = useState(false)
+    const [terminalSelected, setTerminalSelected] = useState(false)
+
+    const setSelectedComponents = (selected) => {
+        if (typeof selected != "string" && selected.length == 0) return
+        if (isMobile) resetSelected()
+
+        if (selected == "project-icon") {
+            setFileManagerSelected(isMobile ? true : !fileManagerSelected)
+        } else if (selected == "txtEditor-icon") {
+            setTextEditorSelected(isMobile ? true : !textEditorSelected)
+        } else if (selected == "console-icon") {
+            setTerminalSelected(isMobile ? true : !terminalSelected)
+        } else if (selected == "play-icon") {
+            setVideoPlayerSelected(isMobile ? true : !videoPlayerSelected)
+        }
+    }
 
     const resetSelected = () => {
-        setTextEditorRendered(true)
-        setFileManagerRendered(false)
-        setVideoPlayerRendered(false)
-        setTerminalRendered(false)
+        setTextEditorSelected(false)
+        setFileManagerSelected(false)
+        setVideoPlayerSelected(false)
+        setTerminalSelected(false)
     }
 
     useEffect(() => {
@@ -35,7 +50,8 @@ function App() {
             setIsMobile(media.matches);
             if (media.matches) {
                 resetSelected()
-            }
+                setTextEditorSelected(true)
+    }
         }
         window.addEventListener('resize', resizeCallback);
 
@@ -49,39 +65,43 @@ function App() {
                 <BrandingBar />
             </div> */}
 
-            <SelectedComponents isMobile={isMobile} selectedObj={{fileManagerRendered, textEditorRendered, videoPlayerRendered, terminalRendered}} />
+            <SelectedComponents
+                isMobile={isMobile}
+                setSelectedComponents={setSelectedComponents}
+                selectedObj={{fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected}}
+            />
         </>
     )
 }
 
-function SelectedComponents({isMobile, selectedObj}) {
+function SelectedComponents({isMobile, setSelectedComponents, selectedObj}) {
     if (typeof selectedObj != "object" || Object.keys(selectedObj).length === 0) return null
 
-    const {fileManagerRendered, textEditorRendered, videoPlayerRendered, terminalRendered} = selectedObj
+    const {fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected} = selectedObj
 
     if (isMobile) {
         let renderable = null
 
         // textEditor first
-        if (textEditorRendered) {
+        if (textEditorSelected) {
             renderable = (
                 <div className='mobile-editor'>
                     <TextEditor />
                 </div>
             )
-        } else if (fileManagerRendered) {
+        } else if (fileManagerSelected) {
             renderable = (
                 <div className='mobile-fileManager'>
                     <FileManager />
                 </div>
             )
-        } else if (videoPlayerRendered) {
+        } else if (videoPlayerSelected) {
             renderable = (
                 <div className='mobile-videoPlayer'>
                     <VideoPlayer />
                 </div>
             )
-        } else if (terminalRendered) {
+        } else if (terminalSelected) {
             renderable = (
                 <div className='mobile-terminal'>
                     <Terminal />
@@ -94,7 +114,7 @@ function SelectedComponents({isMobile, selectedObj}) {
                 {renderable}
 
                 <div className='mobile-sidebar'>
-                    <Sidebar />
+                    <Sidebar setSelected={setSelectedComponents} />
                 </div>
             </div>
         )
@@ -102,19 +122,19 @@ function SelectedComponents({isMobile, selectedObj}) {
         const devPanelRenderable = [null, null]
         let fileManagerRenderable = null
 
-        if (fileManagerRendered) {
+        if (fileManagerSelected) {
             fileManagerRenderable = (<div className='compiler-panel-fileManager'>
                 <FileManager />
             </div>)
         }
 
-        if (videoPlayerRendered) {
+        if (videoPlayerSelected) {
             devPanelRenderable[0] = (<div key="VideoPlayer" className='player-grid'>
                 <VideoPlayer />
             </div>)
         }
 
-        if (terminalRendered) {
+        if (terminalSelected) {
             devPanelRenderable[1] = (<div key="Terminal" className='terminal-grid'>
                 <Terminal />
             </div>)
@@ -123,13 +143,13 @@ function SelectedComponents({isMobile, selectedObj}) {
         return (
             <div className='compiler-panel'>
                 <div className='compiler-panel-sidebar'>
-                    <Sidebar />
+                    <Sidebar setSelected={setSelectedComponents} />
                 </div>
 
                 {fileManagerRenderable}
 
-                <div className={'dev-panel ' + (fileManagerRendered ? 'panel-col3' : 'panel-col2')}>
-                    <div className={getEditorClass({videoPlayerRendered, terminalRendered})}>
+                <div className={'dev-panel ' + (fileManagerSelected ? 'panel-col3' : 'panel-col2')}>
+                    <div className={getEditorClass({videoPlayerSelected, terminalSelected})}>
                         <TextEditor />
                     </div>
                     {devPanelRenderable}
@@ -141,13 +161,13 @@ function SelectedComponents({isMobile, selectedObj}) {
 
 function getEditorClass(renderedComponents) {
     if (typeof renderedComponents != "object" || Object.keys(renderedComponents).length === 0) return ''
-    const {videoPlayerRendered, terminalRendered} = renderedComponents
+    const {videoPlayerSelected, terminalSelected} = renderedComponents
 
-    if (videoPlayerRendered && terminalRendered) {
+    if (videoPlayerSelected && terminalSelected) {
         return "editor-mini"
-    } else if (terminalRendered) {
+    } else if (terminalSelected) {
         return "editor-half-height"
-    } else if (videoPlayerRendered) {
+    } else if (videoPlayerSelected) {
         return "editor-half-width"
     } else {
         return "editor-full"
