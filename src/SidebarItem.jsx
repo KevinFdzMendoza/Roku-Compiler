@@ -4,8 +4,12 @@ import './SidebarStyles.css'
 
 export function SidebarItem({content, setSelectedButton, isMobile}) {
     if (typeof content != "object" || Object.keys(content).length === 0) return (null)
-    const [selectedItems, setSelectedItems] = useState({"TextEditor": true});
 
+    const [selectedItems, setSelectedItems] = useState({"TextEditor": true});
+    const [hoverItem, setHoverItem] = useState({})
+
+    const mouseEnter = (element) => setHoverItem({[element.id]: true})
+    const mouseLeave = (element) => setHoverItem({[element.id]: false})
     const itemSelected = (element) => {
         if (element == null) return
 
@@ -41,8 +45,10 @@ export function SidebarItem({content, setSelectedButton, isMobile}) {
                             key={id}
                             id={id}
                             className={`sidebar-element-button ${selectedItems[id] ? "selected" : "unSelected"}`}
+                            onMouseEnter={() => mouseEnter(element)}
+                            onMouseLeave={() => mouseLeave(element)}
                         >
-                            <HyperLinkItem key={id}>
+                            <HyperLinkItem key={id} isHover={hoverItem[id]}>
                                 {element}
                             </HyperLinkItem>
                         </button> )

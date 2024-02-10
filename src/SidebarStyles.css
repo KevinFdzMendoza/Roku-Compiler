@@ -21,6 +21,10 @@
     border-radius: 8px;
 }
 
+.sidebar-element-button:hover {
+    color: #D997FF;
+}
+
 .selected {
     background-color: #260029;
     border: 1px solid #260029;

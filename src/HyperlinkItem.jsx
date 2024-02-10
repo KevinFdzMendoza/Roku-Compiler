@@ -1,11 +1,7 @@
-import { useState } from 'react'
-
-export function HyperLinkItem({children}) {
-    // const [count, setCount] = useState(0)
-
+export function HyperLinkItem({isHover, children}) {
     return (
         <section>
-            <img className={children.iconClassName} src={children.icon} />
+            <img className={children.iconClassName} src={isHover ? children.hoverIcon : children.icon} />
             <span className={children.textClassName}>
                 {children.text}
             </span>

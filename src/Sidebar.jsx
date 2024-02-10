@@ -8,6 +8,7 @@ export function Sidebar({isMobile, setSelected}) {
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/project-icon.svg',
+            "hoverIcon": 'src/static/images/project-icon-hover.svg',
             "text": "Archivos"
         },
         {
@@ -15,6 +16,7 @@ export function Sidebar({isMobile, setSelected}) {
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/txtEditor-icon.svg',
+            "hoverIcon": 'src/static/images/txtEditor-icon-hover.svg',
             "text": "Editor"
         },
         {
@@ -22,6 +24,7 @@ export function Sidebar({isMobile, setSelected}) {
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/play-icon.svg',
+            "hoverIcon": 'src/static/images/play-icon-hover.svg',
             "text": "Video"
         },
         {
@@ -29,6 +32,7 @@ export function Sidebar({isMobile, setSelected}) {
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
             "icon": 'src/static/images/console-icon.svg',
+            "hoverIcon": 'src/static/images/console-icon-hover.svg',
             "text": "Terminal"
         }
     ]
