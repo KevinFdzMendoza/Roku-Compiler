@@ -6,10 +6,13 @@ export function SidebarItem({content, setSelectedButton, isMobile}) {
     if (typeof content != "object" || Object.keys(content).length === 0) return (null)
 
     const [selectedItems, setSelectedItems] = useState({"TextEditor": true});
+    const [isMouseDown, setIsMouseDown] = useState({})
     const [hoverItem, setHoverItem] = useState({})
 
     const mouseEnter = (element) => setHoverItem({[element.id]: true})
     const mouseLeave = (element) => setHoverItem({[element.id]: false})
+    const mouseDown = (element) => setIsMouseDown({[element.id]: true})
+    const mouseUp = (element) => setIsMouseDown({[element.id]: false})
     const itemSelected = (element) => {
         if (element == null) return
 
@@ -47,8 +50,10 @@ export function SidebarItem({content, setSelectedButton, isMobile}) {
                             className={`sidebar-element-button ${selectedItems[id] ? "selected" : "unSelected"}`}
                             onMouseEnter={() => mouseEnter(element)}
                             onMouseLeave={() => mouseLeave(element)}
+                            onMouseDown={() => mouseDown(element)}
+                            onMouseUp={() => mouseUp(element)}
                         >
-                            <HyperLinkItem key={id} isHover={hoverItem[id]}>
+                            <HyperLinkItem key={id} isHover={hoverItem[id]} isClickDown={isMouseDown[id] && !selectedItems[id]}>
                                 {element}
                             </HyperLinkItem>
                         </button> )

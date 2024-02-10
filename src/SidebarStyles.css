@@ -30,9 +30,17 @@
     border: 1px solid #260029;
 }
 
+.selected:active {
+    color: #D997FF;
+}
+
 .unSelected {
     background-color: #26002900;
     border: 1px solid #26002900;
+}
+
+.unSelected:active {
+    color: #260029;
 }
 
 .sidebar-element-button + .sidebar-element-button {
