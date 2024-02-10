@@ -78,13 +78,13 @@ function SelectedComponents({isMobile, setSelectedFunc, selectedObj}) {
     if (typeof selectedObj != "object" || Object.keys(selectedObj).length === 0) return null
 
     if (isMobile) {
-        return renderMobileComponents(selectedObj, setSelectedFunc)
+        return renderMobileComponents(isMobile, setSelectedFunc, selectedObj)
     } else {
-        return renderComponents(selectedObj, setSelectedFunc)
+        return renderComponents(isMobile, setSelectedFunc, selectedObj)
     }
 }
 
-function renderMobileComponents(selectedObj, setSelectedFunc) {
+function renderMobileComponents(isMobile, setSelectedFunc, selectedObj) {
     const {fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected} = selectedObj
     let renderable = null
 
@@ -120,13 +120,13 @@ function renderMobileComponents(selectedObj, setSelectedFunc) {
             {renderable}
 
             <div className='mobile-sidebar'>
-                <Sidebar setSelected={setSelectedFunc} />
+                <Sidebar isMobile={isMobile} setSelected={setSelectedFunc} />
             </div>
         </div>
     )
 }
 
-function renderComponents(selectedObj, setSelectedFunc) {
+function renderComponents(isMobile, setSelectedFunc, selectedObj) {
     const {fileManagerSelected, textEditorSelected, videoPlayerSelected, terminalSelected} = selectedObj
     const devPanelRenderable = [null, null]
     let fileManagerRenderable = null
@@ -152,7 +152,7 @@ function renderComponents(selectedObj, setSelectedFunc) {
     return (
         <div className='compiler-panel'>
             <div className='compiler-panel-sidebar'>
-                <Sidebar setSelected={setSelectedFunc} />
+                <Sidebar isMobile={isMobile} setSelected={setSelectedFunc} />
             </div>
 
             {fileManagerRenderable}

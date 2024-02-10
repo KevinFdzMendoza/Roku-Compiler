@@ -1,7 +1,7 @@
 import { SidebarItem } from './SidebarItem'
 import './SidebarStyles.css'
 
-export function Sidebar({setSelected}) {
+export function Sidebar({isMobile, setSelected}) {
     const buttonsObj = [
         {
             "id": "FileManager",
@@ -42,7 +42,7 @@ export function Sidebar({setSelected}) {
     return (
         <div className='sidebar'>
             <div className='sidebar-elements'>
-                <SidebarItem content={buttonsObj} setSelectedButton={onSelected} />
+                <SidebarItem content={buttonsObj} setSelectedButton={onSelected} isMobile={isMobile} />
             </div>
         </div>
     )

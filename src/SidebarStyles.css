@@ -15,12 +15,20 @@
 .sidebar-element-button {
     display: flex;
     align-items: center;
-    background-color: #260029;
     color: #F2E6FF;
     height: 98px;
     width: 72px;
     border-radius: 8px;
+}
+
+.selected {
+    background-color: #260029;
     border: 1px solid #260029;
+}
+
+.unSelected {
+    background-color: #26002900;
+    border: 1px solid #26002900;
 }
 
 .sidebar-element-button + .sidebar-element-button {
@@ -62,12 +70,10 @@
     .sidebar-element-button {
         display: flex;
         align-items: center;
-        background-color: #260029;
         color: #F2E6FF;
         height: 78px;
         width: 72px;
         border-radius: 8px;
-        border: 1px solid #260029;
     }
 
     .sidebar-element-button-icon {
