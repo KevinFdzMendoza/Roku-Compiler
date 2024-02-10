@@ -25,9 +25,9 @@ function App() {
         } else if (selected == "TextEditor") {
             setTextEditorSelected(isMobile ? true : !textEditorSelected)
         } else if (selected == "VideoPlayer") {
-            setTerminalSelected(isMobile ? true : !terminalSelected)
-        } else if (selected == "Terminal") {
             setVideoPlayerSelected(isMobile ? true : !videoPlayerSelected)
+        } else if (selected == "Terminal") {
+            setTerminalSelected(isMobile ? true : !terminalSelected)
         }
     }
 
