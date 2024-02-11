@@ -3,6 +3,8 @@ import { Editor } from '@monaco-editor/react'
 import { Draggable } from "./Draggable.jsx"
 import { EditorTopBarItem } from "./EditorTopBarItem.jsx"
 import { HyperLinkItem } from './HyperLinkItem.jsx'
+import addIcon from "./static/images/add-icon.svg"
+import debugIcon from "./static/images/debug-icon.svg"
 import "./TextEditorStyles.css"
 
 export function TextEditor() {
@@ -30,7 +32,7 @@ export function TextEditor() {
         },
         {
             "name": "Add",
-            "icon": "src/static/images/add-icon.svg",
+            "icon": addIcon,
             "path": "",
             "selected": false,
             "text": ""
@@ -68,7 +70,7 @@ export function TextEditor() {
                 <HyperLinkItem>
                     {{
                         "iconClassName":"textEditor-textArea-icon",
-                        "icon": "src/static/images/debug-icon.svg",
+                        "icon": debugIcon,
                         "textClassName": "textEditor-fileSelector-element-no-text",
                         "text": null
                     }}

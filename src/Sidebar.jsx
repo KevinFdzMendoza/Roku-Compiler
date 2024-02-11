@@ -1,5 +1,4 @@
 import { SidebarItem } from './SidebarItem.jsx'
-import './SidebarStyles.css'
 import projectIcon from './static/images/project-icon.svg'
 import projectIconHover from './static/images/project-icon-hover.svg'
 import projectIconSelected from './static/images/project-icon-selected.svg'
@@ -12,6 +11,7 @@ import playIconSelected from './static/images/play-icon-selected.svg'
 import consoleIcon from './static/images/console-icon.svg'
 import consoleIconHover from './static/images/console-icon-hover.svg'
 import consoleIconSelected from './static/images/console-icon-selected.svg'
+import './SidebarStyles.css'
 
 export function Sidebar({isMobile, setSelected}) {
     const buttonsObj = [

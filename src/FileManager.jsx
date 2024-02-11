@@ -1,7 +1,9 @@
 import { HyperLinkItem } from './HyperLinkItem.jsx'
 import { Draggable } from './Draggable.jsx';
+import folderIcon from "./static/images/folder-icon.svg"
+import fileIcon from "./static/images/file-icon.svg"
+import projectIconTitle from "./static/images/project-icon-title.svg"
 import "./FileManagerStyles.css";
-import { useState, useRef, useLayoutEffect } from 'react'
 
 const CONTAINER_WIDTH = "100%"
 const PADDING_PER_CHILD = 20
@@ -181,7 +183,7 @@ class NodeTree {
                     <HyperLinkItem>
                         {{
                             "iconClassName": "fileManager-element-icon",
-                            "icon": childNode.isFolder ? "src/static/images/folder-icon.svg": "src/static/images/file-icon.svg",
+                            "icon": childNode.isFolder ? folderIcon: fileIcon,
                             "textClassName": "fileManager-element-text",
                             "text": childNode.name
                         }}
@@ -211,7 +213,7 @@ class NodeTree {
                     {
                         {
                             "iconClassName": "fileManager-element-icon",
-                            "icon": "src/static/images/project-icon-title.svg",
+                            "icon": projectIconTitle,
                             "textClassName": "fileManager-element-text",
                             "text": "Proyecto"
                         }

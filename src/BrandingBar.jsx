@@ -1,4 +1,5 @@
 import { HyperLinkItem } from './HyperLinkItem.jsx'
+import brandingIcon from "./static/images/branding-icon.svg"
 import "./BrandingBarStyles.css"
 
 export function BrandingBar() {
@@ -7,7 +8,7 @@ export function BrandingBar() {
             <HyperLinkItem>
                 {{
                     "iconClassName": "brandingBar-icon",
-                    "icon": "src/static/images/branding-icon.svg",
+                    "icon": brandingIcon,
                     "textClassName": "brandingBar-icon-noText",
                     "text": null
                 }}
