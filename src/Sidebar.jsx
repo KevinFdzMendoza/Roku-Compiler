@@ -1,5 +1,17 @@
 import { SidebarItem } from './SidebarItem.jsx'
 import './SidebarStyles.css'
+import projectIcon from './static/images/project-icon.svg'
+import projectIconHover from './static/images/project-icon-hover.svg'
+import projectIconSelected from './static/images/project-icon-selected.svg'
+import txtEditorIcon from './static/images/txtEditor-icon.svg'
+import txtEditorIconHover from './static/images/txtEditor-icon-hover.svg'
+import txtEditorIconSelected from './static/images/txtEditor-icon-selected.svg'
+import playIcon from './static/images/play-icon.svg'
+import playIconHover from './static/images/play-icon-hover.svg'
+import playIconSelected from './static/images/play-icon-selected.svg'
+import consoleIcon from './static/images/console-icon.svg'
+import consoleIconHover from './static/images/console-icon-hover.svg'
+import consoleIconSelected from './static/images/console-icon-selected.svg'
 
 export function Sidebar({isMobile, setSelected}) {
     const buttonsObj = [
@@ -7,36 +19,36 @@ export function Sidebar({isMobile, setSelected}) {
             "id": "FileManager",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
-            "icon": 'src/static/images/project-icon.svg',
-            "hoverIcon": 'src/static/images/project-icon-hover.svg',
-            "selectIcon": 'src/static/images/project-icon-selected.svg',
+            "icon": projectIcon,
+            "hoverIcon": projectIconHover,
+            "selectIcon": projectIconSelected,
             "text": "Archivos"
         },
         {
             "id": "TextEditor",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
-            "icon": 'src/static/images/txtEditor-icon.svg',
-            "hoverIcon": 'src/static/images/txtEditor-icon-hover.svg',
-            "selectIcon": 'src/static/images/txtEditor-icon-selected.svg',
+            "icon": txtEditorIcon,
+            "hoverIcon": txtEditorIconHover,
+            "selectIcon": txtEditorIconSelected,
             "text": "Editor"
         },
         {
             "id": "VideoPlayer",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
-            "icon": 'src/static/images/play-icon.svg',
-            "hoverIcon": 'src/static/images/play-icon-hover.svg',
-            "selectIcon": 'src/static/images/play-icon-selected.svg',
+            "icon": playIcon,
+            "hoverIcon": playIconHover,
+            "selectIcon": playIconSelected,
             "text": "Video"
         },
         {
             "id": "Terminal",
             "iconClassName": "sidebar-element-button-icon",
             "textClassName": "sidebar-element-button-text",
-            "icon": 'src/static/images/console-icon.svg',
-            "hoverIcon": 'src/static/images/console-icon-hover.svg',
-            "selectIcon": 'src/static/images/console-icon-selected.svg',
+            "icon": consoleIcon,
+            "hoverIcon": consoleIconHover,
+            "selectIcon": consoleIconSelected,
             "text": "Terminal"
         }
     ]
