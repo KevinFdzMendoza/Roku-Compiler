@@ -3,7 +3,7 @@ import { HyperLinkItem } from './HyperLinkItem.jsx'
 import './SidebarStyles.css'
 
 export function SidebarItem({content, setSelectedButton, isMobile}) {
-    if (typeof content != "object" || Object.keys(content).length === 0) return (null)
+    if (content == null || Object.keys(content).length === 0) return (null)
 
     const [selectedItems, setSelectedItems] = useState({"TextEditor": true});
     const [isMouseDown, setIsMouseDown] = useState({})

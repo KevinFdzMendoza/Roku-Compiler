@@ -75,7 +75,7 @@ function App() {
 }
 
 function SelectedComponents({isMobile, setSelectedFunc, selectedObj}) {
-    if (typeof selectedObj != "object" || Object.keys(selectedObj).length === 0) return null
+    if (selectedObj == null || Object.keys(selectedObj).length === 0) return null
 
     if (isMobile) {
         return renderMobileComponents(isMobile, setSelectedFunc, selectedObj)
@@ -168,7 +168,7 @@ function renderComponents(isMobile, setSelectedFunc, selectedObj) {
 }
 
 function getEditorClass(renderedComponents) {
-    if (typeof renderedComponents != "object" || Object.keys(renderedComponents).length === 0) return ''
+    if (renderedComponents == null || Object.keys(renderedComponents).length === 0) return ''
     const {videoPlayerSelected, terminalSelected} = renderedComponents
 
     if (videoPlayerSelected && terminalSelected) {

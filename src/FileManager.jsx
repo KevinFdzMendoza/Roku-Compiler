@@ -233,6 +233,8 @@ function getdirectoryStruct() {
 }
 
 function fillTreeNodes(treeStructure, data) {
+    if (data == null) return
+
     // Add nodes with data
     for (const element of data) {
         treeStructure.addNewNode({
