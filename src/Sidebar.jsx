@@ -1,4 +1,4 @@
-import { SidebarItem } from './SidebarItem'
+import { SidebarItem } from './SidebarItem.jsx'
 import './SidebarStyles.css'
 
 export function Sidebar({isMobile, setSelected}) {

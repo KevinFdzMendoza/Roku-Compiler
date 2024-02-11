@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { HyperLinkItem } from './HyperLinkItem'
+import { HyperLinkItem } from './HyperLinkItem.jsx'
 
 export function EditorTopBarItem({children}) {
     // const [count, setCount] = useState(0)

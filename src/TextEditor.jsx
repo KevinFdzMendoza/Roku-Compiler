@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react'
 import { Editor } from '@monaco-editor/react'
-import { Draggable } from "./Draggable"
-import { EditorTopBarItem } from "./EditorTopBarItem"
-import { HyperLinkItem } from './HyperLinkItem'
+import { Draggable } from "./Draggable.jsx"
+import { EditorTopBarItem } from "./EditorTopBarItem.jsx"
+import { HyperLinkItem } from './HyperLinkItem.jsx'
 import "./TextEditorStyles.css"
 
 export function TextEditor() {

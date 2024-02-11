@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { BrandingBar } from './BrandingBar'
-import { Sidebar } from './Sidebar'
-import { FileManager } from './FileManager'
-import { TextEditor } from "./TextEditor";
-import { VideoPlayer } from "./VideoPlayer";
-import { Terminal } from "./Terminal";
+import { BrandingBar } from './BrandingBar.jsx'
+import { Sidebar } from './Sidebar.jsx'
+import { FileManager } from './FileManager.jsx'
+import { TextEditor } from "./TextEditor.jsx";
+import { VideoPlayer } from "./VideoPlayer.jsx";
+import { Terminal } from "./Terminal.jsx";
 import './AppStyles.css'
 
 function App() {

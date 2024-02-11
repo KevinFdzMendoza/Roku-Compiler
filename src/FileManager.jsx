@@ -1,5 +1,5 @@
-import { HyperLinkItem } from './HyperLinkItem'
-import { Draggable } from './Draggable';
+import { HyperLinkItem } from './HyperLinkItem.jsx'
+import { Draggable } from './Draggable.jsx';
 import "./FileManagerStyles.css";
 import { useState, useRef, useLayoutEffect } from 'react'
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { HyperLinkItem } from './HyperLinkItem'
+import { HyperLinkItem } from './HyperLinkItem.jsx'
 import './SidebarStyles.css'
 
 export function SidebarItem({content, setSelectedButton, isMobile}) {

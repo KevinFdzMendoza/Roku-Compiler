@@ -1,4 +1,4 @@
-import { HyperLinkItem } from './HyperLinkItem'
+import { HyperLinkItem } from './HyperLinkItem.jsx'
 import "./BrandingBarStyles.css"
 
 export function BrandingBar() {
