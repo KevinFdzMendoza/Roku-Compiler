@@ -82,17 +82,6 @@ export function TextEditor() {
 
 function getEditorAttributes() {
     return {
-        // "CTAs": {
-        //     "debug": {
-        //         "iconClassName":"textEditor-textArea-icon",
-        //         "icon": "src/static/images/debug-icon.svg",
-        //         "textClassName": "textEditor-fileSelector-element-no-text",
-        //         "text": null
-        //     },
-        //     "save": {
-
-        //     }
-        // },
         "options": {
             fontSize: 16,
             wordWrap: "on",
